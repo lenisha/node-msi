@@ -12,9 +12,9 @@
     },
     "dependencies": {
         "async": "^2.6.2",
-        "mssql": "^4.3.5",
         "q": "^1.4.1",
         "request": "^2.67.0",
-        "tedious": "~6.1.0"
+        "tedious": "~6.1.0",
+        "express": "^4.16.4"
     }
 }
