@@ -17,7 +17,7 @@ app.get('/', function (req, res) {
  
   // Get an MSI access token for the azure sql database connection.
   auth.getMSIAccessToken().then(function (token) {
-    console.log(" get MSI access token for request /add : "+JSON.stringify(token));
+    console.log(" get MSI access token for request : "+JSON.stringify(token));
     // connect to database
     var config = {
         server: appconfig.SQLSERVER,
@@ -48,16 +48,16 @@ app.get('/', function (req, res) {
     });
     connection.on('debug', function(messagetext) {
         if (messagetext) {
-            console.log('request /add database connection debugtext: ' + messagetext);
+            console.log('request database connection debugtext: ' + messagetext);
         }else {
-            console.log("request /add database connection Debug called with no messagetext object.");
+            console.log("request database connection Debug called with no messagetext object.");
         }
     });
     connection.on('connect', function(err) {
     // If no error, then good to go...
         console.log('>>> Got connection azure sql server via tedious in request /add, next go to execute sql query statement ');
         executeStatement();
-    }
+     } 
     );
 
     });
@@ -68,14 +68,12 @@ function executeStatement() {
     var sqlstr = "INSERT INTO CLOUD_ENG(name, email) VALUES('test', 'test')";
     console.log("go to write a row to database via MSI");
     // create Request object
-    var request = new Request();
-    request.query(sqlstr, function (err, recordset) {
-
+    var sqlRequest = new Request();
+    sqlRequest.query(sqlstr, function (err, recordset) {
       if (err) {
         console.log('failed to insert a row to azure sql server via tedious');
         console.log(err);
       }
-
       // send records as a response
       console.log(recordset);
       res.end(JSON.stringify(recordset));

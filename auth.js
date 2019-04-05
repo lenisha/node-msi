@@ -25,7 +25,6 @@ getMSIAccessToken: function () {
                json: true}, function (err, response, body) {
 
     console.log('got response of MSI access token request: '+ response);
-    console.log(err);
     console.log(body);
     if (err) {
       console.log('failed to get MSI acccess Token: ');
