@@ -21,18 +21,18 @@ app.get('/', function (req, res) {
     // connect to database
     var config = {
         server: appconfig.SQLSERVER,
-        authentication: {
-          type: "azure-active-directory-access-token",
-          options: {
-            token: token
-          }
-        }
         options: {
           database: appconfig.SQLDATABASE,
           encrypt: true, //indicates if the connection should be encrypted
           port: 1433, //port to establish connection
           rowCollectionOnRequestCompletion: true, //returns rows object on the new Request callback
           useColumnNames: true //returns columns names within the rows object on the new Request callback
+        },
+        authentication: {
+          type: "azure-active-directory-access-token",
+          options: {
+            token: token
+          }
         }
     };
     console.log(" connect to database in request /add with config: "+JSON.stringify(config));
