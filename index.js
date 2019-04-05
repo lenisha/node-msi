@@ -65,34 +65,35 @@ app.get('/', function (req, res) {
 });
 
 
-function executeStatement() {
+function executeStatement(connection, req, res) {
+  // If no error, then good to proceed.
   console.log("Connected");
- 
+
   var results = [];
   var request = new Request("SELECT * FROM CLOUD_ENG", function (err, rowCount, rows) {
-      if (err) {
-        //Error occured 
-        console.log('Error performing select: ');
-        console.log(err);
-        res.send(err);
-      } else 
-       //Successful request
-        rows.forEach(function(row) {
-          var name = row.name.value;
-          var email = row.email.value;
-          results.push({name, email})
-        });
+    if (err) {
+      //Error occured 
+      console.log('Error performing select: ');
+      console.log(err);
+      res.send(err);
+    } else 
 
-        //Display results
-        console.log('Row count = ' + rowCount);
-        console.log('Results = ' +  JSON.stringify(results));
-
-        res.send( JSON.stringify(results) );
+    //Successful request
+    rows.forEach(function(row) {
+      var name = row.name.value;
+      var email = row.email.value;
+      results.push({name, email})
     });
-    connection.execSql(request);
-    });
-  }
 
+    //Display results
+    console.log('Row count = ' + rowCount);
+    console.log('Results = ' +  JSON.stringify(results));
+
+    res.send( JSON.stringify(results) );
+  });
+
+  connection.execSql(request);
+}
 
 
 // Start application
