@@ -55,8 +55,9 @@ app.get('/', function (req, res) {
     });
     connection.on('connect', function(err) {
     // If no error, then good to go...
-        console.log('>>> Got connection azure sql server via tedious in request /add, next go to execute sql query statement ');
+        console.log('>>> Got connection azure sql server via tedious in request, next go to execute sql query statement ');
         executeStatement();
+        connection.close();
      } 
     );
 
@@ -65,21 +66,30 @@ app.get('/', function (req, res) {
 
 
 function executeStatement() {
-    var sqlstr = "INSERT INTO CLOUD_ENG(name, email) VALUES('test', 'test')";
-    console.log("go to write a row to database via MSI");
-    // create Request object
-    var sqlRequest = new Request();
-    sqlRequest.query(sqlstr, function (err, recordset) {
+  console.log("Connected");
+ 
+  var results = [];
+  var request = new Request("SELECT * FROM CLOUD_ENG", function (err, rowCount, rows) {
       if (err) {
-        console.log('failed to insert a row to azure sql server via tedious');
+        //Error occured 
+        console.log('Error performing select: ');
         console.log(err);
-      }
-      // send records as a response
-      console.log(recordset);
-      res.end(JSON.stringify(recordset));
+        res.send(err);
+      } else 
+       //Successful request
+        rows.forEach(function(row) {
+          var name = row.name.value;
+          var email = row.email.value;
+          results.push({name, email})
+        });
 
-      connection.close();
+        //Display results
+        console.log('Row count = ' + rowCount);
+        console.log('Results = ' +  JSON.stringify(results));
 
+        res.send( JSON.stringify(results) );
+    });
+    connection.execSql(request);
     });
   }
 
