@@ -57,7 +57,6 @@ app.get('/', function (req, res) {
     // If no error, then good to go...
         console.log('>>> Got connection azure sql server via tedious in request, next go to execute sql query statement ');
         executeStatement(connection,req,res);
-        connection.close();
      } 
     );
 
@@ -90,6 +89,7 @@ function executeStatement(connection, req, res) {
     console.log('Results = ' +  JSON.stringify(results));
 
     res.send( JSON.stringify(results) );
+    connection.close();
   });
 
   connection.execSql(request);
