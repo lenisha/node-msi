@@ -12,9 +12,9 @@
     },
     "dependencies": {
         "async": "^2.6.2",
+        "express": "^4.16.4",
         "q": "^1.4.1",
         "request": "^2.67.0",
-        "tedious": "~6.1.1",
-        "express": "^4.16.4"
+        "tedious": "github:tediousjs/tedious#pull/896/head"
     }
 }

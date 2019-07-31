@@ -13,11 +13,8 @@ var express = require('express');
 var app = express();
 app.get('/', function (req, res) {
 
-  console.log("Got request " + req.url + " to test add data to database via MSI AccessToken authentication.");
+    console.log("Got request " + req.url + " to test add data to database via MSI AccessToken authentication.");
  
-  // Get an MSI access token for the azure sql database connection.
-  auth.getMSIAccessToken().then(function (token) {
-    console.log(" get MSI access token for request : "+JSON.stringify(token));
     // connect to database
     var config = {
         server: appconfig.SQLSERVER,
@@ -29,12 +26,10 @@ app.get('/', function (req, res) {
           useColumnNames: true //returns columns names within the rows object on the new Request callback
         },
         authentication: {
-          type: "azure-active-directory-access-token",
-          options: {
-            token: token
-          }
+          type: "azure-active-directory-msi-app-service"
         }
     };
+
     console.log(" connect to database in request /add with config: "+JSON.stringify(config));
 
     var connection = new Connection(config);
