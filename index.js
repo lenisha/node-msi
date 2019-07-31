@@ -55,8 +55,8 @@ app.get('/', function (req, res) {
      } 
     );
 
-    });
 });
+
 
 
 function executeStatement(connection, req, res) {
