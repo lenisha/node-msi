@@ -52,10 +52,13 @@ app.get('/', function (req, res) {
       if (err) {
         console.log('ERROR');
         console.log(err);
+        res.send(err);
       }
-    // If no error, then good to go...
+      else {
+        // If no error, then good to go...
         console.log('>>> Got connection azure sql server via tedious in request, next go to execute sql query statement ');
         executeStatement(connection,req,res);
+      }
      } 
     );
 
