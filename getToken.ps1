@@ -87,4 +87,4 @@ Function Get-MRVAzureMSIToken
 }
 
 
-Get-MRVAzureMSIToken -apiVersion "2017-09-01" -resourceURI "https://management.azure.com/"
+Get-MRVAzureMSIToken -apiVersion "2017-09-01" -resourceURI "https://database.azure.com/"
