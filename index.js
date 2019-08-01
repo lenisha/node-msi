@@ -49,6 +49,10 @@ app.get('/', function (req, res) {
         }
     });
     connection.on('connect', function(err) {
+      if (err) {
+        console.log('ERROR');
+        console.log(err);
+      }
     // If no error, then good to go...
         console.log('>>> Got connection azure sql server via tedious in request, next go to execute sql query statement ');
         executeStatement(connection,req,res);
