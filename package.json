@@ -15,6 +15,6 @@
         "express": "^4.16.4",
         "q": "^1.4.1",
         "request": "^2.67.0",
-        "tedious": "github:tediousjs/tedious#pull/896/head"
+        "tedious": "6.2.1"
     }
 }
