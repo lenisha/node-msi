@@ -84,13 +84,16 @@ function executeStatement(connection, req, res) {
       res.send(err);
     } 
     else {
-
+      /**
+       * create table CLOUD_ENG (id varchar(255),test varchar(255) )
+       * insert into CLOUD_ENG ('1', 'test')
+       */
       console.log("ROW COUNT " + rowCount);
       //Successful request
       rows.forEach(function(row) {
-        var name = row.name.value;
-        var email = row.email.value;
-        results.push({name, email})
+        var id = row.id.value;
+        var test = row.test.value;
+        results.push({id, test})
       });
 
       //Display results
