@@ -82,22 +82,24 @@ function executeStatement(connection, req, res) {
       console.log('Error performing select: ');
       console.log(err);
       res.send(err);
-    } else 
+    } 
+    else {
 
-    console.log("ROW COUNT " + rowCount);
-    //Successful request
-    rows.forEach(function(row) {
-      var name = row.name.value;
-      var email = row.email.value;
-      results.push({name, email})
-    });
+      console.log("ROW COUNT " + rowCount);
+      //Successful request
+      rows.forEach(function(row) {
+        var name = row.name.value;
+        var email = row.email.value;
+        results.push({name, email})
+      });
 
-    //Display results
-    console.log('Row count = ' + rowCount);
-    console.log('Results = ' +  JSON.stringify(results));
+      //Display results
+      console.log('Row count = ' + rowCount);
+      console.log('Results = ' +  JSON.stringify(results));
 
-    res.send( JSON.stringify(results) );
-    connection.close();
+      res.send( JSON.stringify(results) );
+      connection.close();
+    }
   });
 
   connection.execSql(request);
