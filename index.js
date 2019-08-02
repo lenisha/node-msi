@@ -23,7 +23,12 @@ app.get('/', function (req, res) {
           encrypt: true, //indicates if the connection should be encrypted
           port: 1433, //port to establish connection
           rowCollectionOnRequestCompletion: true, //returns rows object on the new Request callback
-          useColumnNames: true //returns columns names within the rows object on the new Request callback
+          useColumnNames: true, //returns columns names within the rows object on the new Request callback
+          token: true,
+          log: true,
+          packet: true,
+          data: true,
+          payload: true
         },
         authentication: {
           type: "azure-active-directory-msi-app-service"
@@ -79,6 +84,7 @@ function executeStatement(connection, req, res) {
       res.send(err);
     } else 
 
+    console.log("ROW COUNT " + rowCount);
     //Successful request
     rows.forEach(function(row) {
       var name = row.name.value;
