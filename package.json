@@ -13,8 +13,9 @@
     "dependencies": {
         "async": "^2.6.2",
         "express": "^4.16.4",
+        "log-timestamp": "^0.3.0",
         "q": "^1.4.1",
         "request": "^2.67.0",
-        "tedious": "git+https://github.com/lenisha/tedious.git#MSIAuth"
+        "tedious": "^6.3.0"
     }
 }

@@ -1,5 +1,5 @@
+require('log-timestamp');
 var url = require('url');
-
 var ver = 0;
 
 //SQL Server connection to node js by  tedious driver
