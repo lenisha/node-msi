@@ -6,7 +6,6 @@ var ver = 0;
 var Connection = require('tedious').Connection;
 var Request = require('tedious').Request;
 var TYPES = require('tedious').TYPES;
-var auth = require('./auth');
 var appconfig = require('./appconfig');
 var express = require('express');
 
