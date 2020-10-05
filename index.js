@@ -115,14 +115,6 @@ async function fetchPool(config) {
     const pool = new sql.ConnectionPool(config);
     const poolConnection = await pool.connect();
    
-    poolConnection.on('debug', function(messagetext) {
-      if (messagetext) {
-          console.log('request database connection debugtext: ' +  JSON.stringify(messagetext));
-      }else {
-          console.log("request database connection Debug called with no messagetext object.");
-      }
-   });
-
     const result = await poolConnection.request()
           .query("SELECT * FROM [dbo].[CLOUD_ENG]");
     
