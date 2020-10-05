@@ -1,0 +1,9 @@
+apiVersion: aadpodidentity.k8s.io/v1
+kind: AzureIdentity
+metadata:
+  name: akspodidentity
+  namespace: default
+spec:
+  clientID: 0d6fd290-7c28-4ae2-88f4-78be54c0bab8
+  resourceID: /subscriptions/<subid>/resourcegroups/aks/providers/Microsoft.ManagedIdentity/userAssignedIdentities/demomi
+  type: 0
