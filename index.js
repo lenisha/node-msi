@@ -6,7 +6,6 @@ var ver = 0;
 var Connection = require('tedious').Connection;
 var Request = require('tedious').Request;
 var TYPES = require('tedious').TYPES;
-var auth = require('./auth');
 var appconfig = require('./appconfig');
 var express = require('express');
 
@@ -31,7 +30,11 @@ app.get('/', function (req, res) {
           payload: true
         },
         authentication: {
-          type: "azure-active-directory-msi-app-service"
+          type: "azure-active-directory-msi-vm" // "azure-active-directory-msi-app-service"
+          // optional - in K8S it's mapped using binding
+          //options: {
+          //  clientId: "0d6fd290-7c28-4ae2-88f4-78be54c0bab8"
+          //} 
         }
     };
 
@@ -86,7 +89,7 @@ function executeStatement(connection, req, res) {
     else {
       /**
        * create table CLOUD_ENG (id varchar(255),test varchar(255) )
-       * insert into CLOUD_ENG ('1', 'test')
+       * insert into CLOUD_ENG  VALUES ('1', 'test')
        */
       console.log("ROW COUNT " + rowCount);
       //Successful request

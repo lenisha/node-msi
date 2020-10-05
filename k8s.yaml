@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: node-msi
+  name: node-msi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: node-msi
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: node-msi
+        aadpodidbinding: demoidentity
+    spec:
+      containers:
+      - image: acraccess.azurecr.io/node-msi
+        name: node-msi
+        resources: {}
+        env:
+          - name: SQLSERVER
+            value: "testmetoday.database.windows.net"
+          - name: SQLDATABASE
+            value: "testae" 
+          - name: PORT
+            value: "8080"
+        ports:
+          - containerPort: 8080   
+      nodeSelector:      
+        kubernetes.io/os: linux
+status: {}
